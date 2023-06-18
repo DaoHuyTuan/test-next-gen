@@ -1,39 +1,77 @@
+import Image from "next/image"
 import Link from "next/link"
+import { ExamplesNav } from "@/containers/examples-nav"
+import {
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderHeading,
+} from "@/containers/page-header"
+import { StyleSwitcher } from "@/containers/style-switcher"
+import { ChevronRight } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
-import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/button"
+import { Icons } from "@/components/icons"
+import { Separator } from "@/components/separator"
+
+// import DashboardPage from "@/app/examples/dashboard/page"
 
 export default function IndexPage() {
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Beautifully designed components <br className="hidden sm:inline" />
-          built with Radix UI and Tailwind CSS.
-        </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
-          Accessible and customizable components that you can copy and paste
-          into your apps. Free. Open Source. And Next.js 13 Ready.
-        </p>
-      </div>
-      <div className="flex gap-4">
+    <div className="container relative pb-10">
+      <StyleSwitcher />
+      <PageHeader>
         <Link
-          href={siteConfig.links.docs}
-          target="_blank"
-          rel="noreferrer"
-          className={buttonVariants()}
+          href="/docs/forms/react-hook-form"
+          className="inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium"
         >
-          Documentation
+          🎉 <Separator className="mx-2 h-4" orientation="vertical" /> Building
+          forms with React Hook Form and Zod
+          <ChevronRight className="ml-1 h-4 w-4" />
         </Link>
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={siteConfig.links.github}
-          className={buttonVariants({ variant: "outline" })}
-        >
-          GitHub
-        </Link>
-      </div>
-    </section>
+        <PageHeaderHeading>Build your component library.</PageHeaderHeading>
+        <PageHeaderDescription>
+          Beautifully designed components that you can copy and paste into your
+          apps. Accessible. Customizable. Open Source.
+        </PageHeaderDescription>
+        <div className="flex w-full items-center space-x-4 pb-8 pt-4 md:pb-10">
+          <Link href="/docs" className={cn(buttonVariants())}>
+            Get Started
+          </Link>
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href={siteConfig.links.github}
+            className={cn(buttonVariants({ variant: "outline" }))}
+          >
+            <Icons.gitHub className="mr-2 h-4 w-4" />
+            GitHub
+          </Link>
+        </div>
+      </PageHeader>
+      <ExamplesNav className="[&>a:first-child]:text-primary" />
+      <section className="space-y-8 overflow-hidden rounded-lg border-2 border-primary dark:border-muted md:hidden">
+        <Image
+          src="/examples/dashboard-light.png"
+          width={1280}
+          height={866}
+          alt="Dashboard"
+          className="block dark:hidden"
+        />
+        <Image
+          src="/examples/dashboard-dark.png"
+          width={1280}
+          height={866}
+          alt="Dashboard"
+          className="hidden dark:block"
+        />
+      </section>
+      <section className="hidden md:block">
+        <div className="overflow-hidden rounded-lg border bg-background shadow-xl">
+          {/* <DashboardPage /> */}
+        </div>
+      </section>
+    </div>
   )
 }
