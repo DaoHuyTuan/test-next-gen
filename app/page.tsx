@@ -1,77 +1,43 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ExamplesNav } from "@/containers/examples-nav"
-import {
-  PageHeader,
-  PageHeaderDescription,
-  PageHeaderHeading,
-} from "@/containers/page-header"
 import { StyleSwitcher } from "@/containers/style-switcher"
-import { ChevronRight } from "lucide-react"
-
-import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/button"
-import { Icons } from "@/components/icons"
-import { Separator } from "@/components/separator"
-
+import { UserAuthForm } from "@/containers/user-auth-form"
 // import DashboardPage from "@/app/examples/dashboard/page"
 
 export default function IndexPage() {
   return (
     <div className="container relative pb-10">
       <StyleSwitcher />
-      <PageHeader>
-        <Link
-          href="/docs/forms/react-hook-form"
-          className="inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium"
-        >
-          🎉 <Separator className="mx-2 h-4" orientation="vertical" /> Building
-          forms with React Hook Form and Zod
-          <ChevronRight className="ml-1 h-4 w-4" />
-        </Link>
-        <PageHeaderHeading>Build your component library.</PageHeaderHeading>
-        <PageHeaderDescription>
-          Beautifully designed components that you can copy and paste into your
-          apps. Accessible. Customizable. Open Source.
-        </PageHeaderDescription>
-        <div className="flex w-full items-center space-x-4 pb-8 pt-4 md:pb-10">
-          <Link href="/docs" className={cn(buttonVariants())}>
-            Get Started
-          </Link>
-          <Link
-            target="_blank"
-            rel="noreferrer"
-            href={siteConfig.links.github}
-            className={cn(buttonVariants({ variant: "outline" }))}
-          >
-            <Icons.gitHub className="mr-2 h-4 w-4" />
-            GitHub
-          </Link>
-        </div>
-      </PageHeader>
-      <ExamplesNav className="[&>a:first-child]:text-primary" />
-      <section className="space-y-8 overflow-hidden rounded-lg border-2 border-primary dark:border-muted md:hidden">
+      <div className="md:hidden">
         <Image
-          src="/examples/dashboard-light.png"
+          src="/examples/authentication-light.png"
           width={1280}
-          height={866}
-          alt="Dashboard"
+          height={843}
+          alt="Authentication"
           className="block dark:hidden"
         />
         <Image
-          src="/examples/dashboard-dark.png"
+          src="/examples/authentication-dark.png"
           width={1280}
-          height={866}
-          alt="Dashboard"
+          height={843}
+          alt="Authentication"
           className="hidden dark:block"
         />
-      </section>
-      <section className="hidden md:block">
-        <div className="overflow-hidden rounded-lg border bg-background shadow-xl">
-          {/* <DashboardPage /> */}
+      </div>
+      <div className="container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:px-0">
+        <div className="lg:p-8">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div className="flex flex-col space-y-2 text-center">
+              <h1 className="text-left text-3xl font-extrabold tracking-tight">
+                Login to your account
+              </h1>
+            </div>
+            <UserAuthForm />
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   )
 }
