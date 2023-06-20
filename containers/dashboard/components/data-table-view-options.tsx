@@ -24,7 +24,6 @@ export function DataTableViewOptions<TData>({
     <Button
       variant="default"
       size="sm"
-      onClick={}
       className="ml-auto flex h-8 gap-1">
       <Icons.add size={16} />
       Add Plan

@@ -1,9 +1,8 @@
-"use client"
+'use client'
 
-import { Row } from "@tanstack/react-table"
-import { Copy, MoreHorizontal, Pen, Star, Tags, Trash } from "lucide-react"
-
-import { Button } from "@/components/button"
+import { labels } from '../data/data'
+import { portfolioSchema } from '../data/schema'
+import { Button } from '@/components/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,18 +14,17 @@ import {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@/components/dropdown-menu"
-
-import { labels } from "../data/data"
-import { portfolioSchema } from "../data/schema"
+  DropdownMenuTrigger
+} from '@/components/dropdown-menu'
+import { Row } from '@tanstack/react-table'
+import { Copy, MoreHorizontal, Pen, Star, Tags, Trash } from 'lucide-react'
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>
 }
 
 export function DataTableRowActions<TData>({
-  row,
+  row
 }: DataTableRowActionsProps<TData>) {
   const task = portfolioSchema.parse(row.original)
 
@@ -35,13 +33,14 @@ export function DataTableRowActions<TData>({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-        >
+          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted">
           <MoreHorizontal className="h-4 w-4" />
           <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[160px]">
+      <DropdownMenuContent
+        align="end"
+        className="w-[160px]">
         <DropdownMenuItem>
           <Pen className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
           Edit
@@ -61,13 +60,10 @@ export function DataTableRowActions<TData>({
             Labels
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.label}>
-              {labels.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
-                  {label.label}
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
+            <DropdownMenuSubTrigger>
+              <Tags className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+              Labels
+            </DropdownMenuSubTrigger>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
